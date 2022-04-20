@@ -9,7 +9,7 @@ export default function Searchbar() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search/${term}`);
+    navigate(`/search?item=${term}`);
   };
   return (
     <div className="searchbar">
