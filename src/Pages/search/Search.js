@@ -11,7 +11,7 @@ export default function Search() {
   const query = queryParams.get("item");
   console.log(query);
 
-  const url = `http://localhost:3000/recipes?q=${query}`;
+  const url = `http://localhost:3000/recipes?title_like=${query}`;
 
   const { error, isPending, data } = useFetch(url);
 
