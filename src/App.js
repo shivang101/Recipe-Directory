@@ -8,12 +8,14 @@ import Recipe from "./Pages/recipe/Recipe";
 import NavBar from "./components/NavBar";
 //styles
 import "./App.css";
+import ThemeSelector from "./components/ThemeSelector";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <NavBar />
+        <ThemeSelector />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/Create" element={<Create />} />
