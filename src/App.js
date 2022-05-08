@@ -9,10 +9,15 @@ import NavBar from "./components/NavBar";
 //styles
 import "./App.css";
 import ThemeSelector from "./components/ThemeSelector";
+import { useTheme } from "./hooks/useTheme";
 
 function App() {
+  const { mode } = useTheme();
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{ background: mode === "#333" ? "#333" : "#dfdfdf" }}
+    >
       <BrowserRouter>
         <NavBar />
         <ThemeSelector />

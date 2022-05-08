@@ -34,8 +34,6 @@ export default function Create() {
     error,
   } = useFetch("http://localhost:3000/recipes", "POST");
 
-  console.log(data);
-
   const ingInput = useRef(null);
 
   const handleAdd = (e) => {
@@ -56,8 +54,20 @@ export default function Create() {
   }, [data]);
 
   return (
-    <div className="create">
-      <h2 className="page-title">Add a new Recipe</h2>
+    <div
+      className="create"
+      style={{
+        color: ctx.mode === "#333" ? "#fff" : "",
+      }}
+    >
+      <h2
+        className="page-title"
+        style={{
+          color: ctx.mode === "#333" ? "#fff" : "",
+        }}
+      >
+        Add a new Recipe
+      </h2>
       <form className="create-form" onSubmit={handleSubmit}>
         <label>
           <span>Recipe Title:</span>
