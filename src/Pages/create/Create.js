@@ -1,11 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../../hooks/useTheme";
 
 //styles
 import "./Create.css";
 
 export default function Create() {
+  const ctx = useTheme();
+
   const [title, setTtile] = useState("");
   const [method, setMethod] = useState("");
   const [cookingTime, setCookingTime] = useState("");
@@ -76,7 +79,11 @@ export default function Create() {
               value={newIngredient}
               ref={ingInput}
             />
-            <button onClick={handleAdd} className="btn">
+            <button
+              onClick={handleAdd}
+              className="btn"
+              style={{ background: ctx.color }}
+            >
               {" "}
               Add
             </button>
@@ -109,7 +116,9 @@ export default function Create() {
             value={cookingTime}
           />
         </label>
-        <button className="btn">Submit</button>
+        <button className="btn" style={{ background: ctx.color }}>
+          Submit
+        </button>
       </form>
     </div>
   );
