@@ -23,7 +23,7 @@ export default function RecipeList({ recipes }) {
                 color: ctx.mode === "#333" ? "#fff" : "#808080",
               }}
             >
-              {recipe.title}
+              {recipe.Title}
             </h3>
             <p
               style={{
