@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { useFetch } from "../../hooks/useFetch";
+// import { useFetch } from "../../hooks/useFetch";
+import { projectFirestore } from "../../firebase/config";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../hooks/useTheme";
 
@@ -9,7 +10,7 @@ import "./Create.css";
 export default function Create() {
   const ctx = useTheme();
 
-  const [title, setTtile] = useState("");
+  const [Title, setTtile] = useState("");
   const [method, setMethod] = useState("");
   const [cookingTime, setCookingTime] = useState("");
   const [newIngredient, setNewIngredient] = useState("");
@@ -17,22 +18,27 @@ export default function Create() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(title, method, cookingTime, ingredients);
-    newRecipeData({
-      title,
+    const doc = {
+      Title,
       ingredients,
       method,
-      cookintTime: `${cookingTime} minutes`,
-    });
+      cookingTime: `${cookingTime} minutes`,
+    };
+    try {
+      await projectFirestore.collection("Recipes").add(doc);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const {
-    postData: newRecipeData,
-    data,
-    error,
-  } = useFetch("http://localhost:3000/recipes", "POST");
+  // const {
+  //   postData: newRecipeData,
+  //   data,
+  //   error,
+  // } = useFetch("http://localhost:3000/recipes", "POST");
 
   const ingInput = useRef(null);
 
@@ -47,11 +53,11 @@ export default function Create() {
     ingInput.current.focus();
   };
 
-  useEffect(() => {
-    if (data) {
-      navigate("/");
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     navigate("/");
+  //   }
+  // }, [data]);
 
   return (
     <div
@@ -74,7 +80,7 @@ export default function Create() {
           <input
             type="text"
             onChange={(e) => setTtile(e.target.value)}
-            value={title}
+            value={Title}
             required
             placeholder="Enter a Title"
           />
